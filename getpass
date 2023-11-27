@@ -1,0 +1,16 @@
+#!/bin/bash
+
+pass=""
+if [ "$1" == "spsoft" ]; then
+	pass=$(cat $SPSOFT) 
+elif [ "$1" == "private" ]; then
+	pass=$(cat $PRIVATE)
+elif [ "$1" == "google" ]; then
+	pass=$(gcloud auth print-access-token)
+else
+	echo "not available"
+fi
+
+if [ -n "$pass" ]; then
+	echo "$pass" | xclip -rmlastnl -selection clipboard
+fi

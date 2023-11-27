@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ "$1" == "enable" ]; then
+	if [ -e $SERVICE_ACCOUNT ];then
+		mv $CURRENT_ACCOUNT $USER_ACCOUNT
+		mv $SERVICE_ACCOUNT $CURRENT_ACCOUNT
+		echo "Serivce account enabled"
+	else
+		echo "Looks like already enabled"
+	fi
+elif [ "$1" == "disable" ]; then
+	if [ -e $USER_ACCOUNT ]; then
+		mv $CURRENT_ACCOUNT $SERVICE_ACCOUNT
+		mv $USER_ACCOUNT $CURRENT_ACCOUNT
+		echo "Service account disabled"
+	else
+		echo "Looks like already disabled"
+	fi
+else
+	echo "Wrong value, use: enable/disable"
+fi
