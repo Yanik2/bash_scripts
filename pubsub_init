@@ -1,0 +1,17 @@
+#!/bin/bash
+
+pubsub_port="8085"
+if [ -n "$1" ]; then
+	pubsub_port="$1"
+fi
+
+BASE_URL="http://localhost:$pubsub_port/v1/projects/local-project"
+
+echo "create local topic: "
+curl -X PUT $BASE_URL/topics/local-topic
+
+echo "create local subscription:"
+curl -X PUT $BASE_URL/subscriptions/local-subscription \
+	-H 'Content-Type: application/json' \
+	-d '{"topic": "projects/local-project/topics/local-topic"}'
+
